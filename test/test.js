@@ -23,3 +23,11 @@ PalettoTestCase.prototype.testStory2 = function () {
     assertTrue(e.getColor("A6") === e.enumPion.JAUNE);
 
 };
+
+PalettoTestCase.prototype.testStory2 = function () {
+
+    e.retirePiece(1,"A6");
+    assertTrue(e.getColor("A6") === e.enumPion.VIDE);
+    assertTrue(e.getNbPieces() === 35);
+
+};
