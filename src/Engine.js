@@ -8,7 +8,7 @@ var Engine = function () {
     var joueur2 = [];
 
 // public attributes
-    this.enumPion = {NOIR: "noir", VERT: "vert", BLEU: "bleu", BLANC: "blanc", JAUNE: "jaune", ROUGE: "rouge"};
+    this.enumPion = {NOIR: "noir", VERT: "vert", BLEU: "bleu", BLANC: "blanc", JAUNE: "jaune", ROUGE: "rouge", VIDE: "vide"};
 
 // public methods
     this.initPlateau = function () {
@@ -108,4 +108,22 @@ var Engine = function () {
 
         return tableau[pos.ligne][pos.colonne];
     };
+
+    this.getNbPieces = function(){
+        var nb = 0;
+        for (var i = 0; i < 6; i++) {
+            for (var j = 0; j < 6; j++) {
+                if (tableau[i][j] != this.enumPion.VIDE) {
+                    nb++;
+                }
+            }
+        }
+        return nb;
+    };
+
+    this.retirePiece = function(position){
+        tableau[this.getPosition(position).ligne][this.getPosition(position).colonne] = this.enumPion.VIDE;
+    };
+
+
 };
