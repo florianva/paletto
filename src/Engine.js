@@ -77,5 +77,19 @@ var Engine = function () {
             }
         }
 
-    }
+    };
+
+    this.getPosition = function(placement) {
+        var abs = placement.charCodeAt(0);
+        var ord = placement.charAt(1);
+
+        var ligne = abs - 65;
+        var colonne = ord - 1;
+
+        return {ligne : ligne, colonne : colonne};
+    };
+
+
+
+
 };
