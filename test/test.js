@@ -24,7 +24,7 @@ PalettoTestCase.prototype.testStory2 = function () {
 
 };
 
-PalettoTestCase.prototype.testStory2 = function () {
+PalettoTestCase.prototype.testStory3 = function () {
 
     e.retirePiece("A6");
     assertTrue(e.getColor("A6") === e.enumPion.VIDE);
