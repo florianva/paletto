@@ -19,15 +19,7 @@ PalettoTestCase.prototype.testStory1 = function () {
 PalettoTestCase.prototype.testStory2 = function () {
 
     e.choose(1,"A6");
-    assertTrue(e.getJoueur1()[0] === "A6" && e.getColor("A6") === e.enumPion.JAUNE);
-
-};
-
-PalettoTestCase.prototype.testStory3 = function () {
-    var player = 1;
-    var position = e.RetirerPiece(e.getPiece(player));
-    var test = e.enumPion.VIDE(position);
-    assertTrue();
-
+    assertTrue(e.getJoueur1()[0] === "A6");
+    assertTrue(e.getColor("A6") === e.enumPion.JAUNE);
 
 };

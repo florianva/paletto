@@ -4,6 +4,8 @@ var Engine = function () {
 
 // private attributes and methods
     var tableau = [];
+    var joueur1 = [];
+    var joueur2 = [];
 
 // public attributes
     this.enumPion = {NOIR: "noir", VERT: "vert", BLEU: "bleu", BLANC: "blanc", JAUNE: "jaune", ROUGE: "rouge"};
@@ -83,13 +85,27 @@ var Engine = function () {
         var abs = placement.charCodeAt(0);
         var ord = placement.charAt(1);
 
-        var ligne = abs - 65;
-        var colonne = ord - 1;
+        var ligne = ord - 1;
+        var colonne = abs - 65;
 
         return {ligne : ligne, colonne : colonne};
     };
 
 
+    this.choose = function (joueur, position) {
+        if(joueur === 1)
+            joueur1.push(position);
+        else
+            joueur2.push(position);
+    };
+    
+    this.getJoueur1 = function () {
+        return joueur1;
+    };
 
+    this.getColor = function (position) {
+        var pos = this.getPosition(position);
 
+        return tableau[pos.ligne][pos.colonne];
+    };
 };
