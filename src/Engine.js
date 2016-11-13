@@ -6,6 +6,7 @@ var Engine = function () {
     var tableau = [];
     var joueur1 = [];
     var joueur2 = [];
+    var piecesDispo = [];
 
 // public attributes
     this.enumPion = {NOIR: "noir", VERT: "vert", BLEU: "bleu", BLANC: "blanc", JAUNE: "jaune", ROUGE: "rouge", VIDE: "vide"};
@@ -91,6 +92,16 @@ var Engine = function () {
         return {ligne : ligne, colonne : colonne};
     };
 
+    this.getPlacement = function(i, j) {
+
+        var lettre = String.fromCharCode(j+65);
+        var num = i+1;
+        var number = num.toString();
+        var placement = lettre.concat(number);
+
+        return placement;
+    };
+
 
     this.choose = function (joueur, position) {
         if(joueur === 1)
@@ -131,6 +142,14 @@ var Engine = function () {
         tableau[this.getPosition(position).ligne][this.getPosition(position).colonne] = this.enumPion.VIDE;
     };
 
+    this.getPiecesPrenables = function(){
+        for (var i = 0; i < 6; i++) {
+            for (var j = 0; j < 6; j++) {
+               var nbVoisin = 0;
+                if(tableau[j][i] !== this.enumPion.VIDE) {
+                    if (j > 0 && j < 5) {
+                        if (tableau[j - 1][i] !== this.enumPion.VIDE) {
+                            nbVoisin += 1;
     this.getWinner = function () {
         if(this.testWinner(this.getJoueur1()) === true){
             return "joueur1";
@@ -140,6 +159,53 @@ var Engine = function () {
             return "nobody";
         }
     };
+
+                        }
+                        if (tableau[j + 1][i] !== this.enumPion.VIDE) {
+                            nbVoisin += 1;
+                        }
+                    } else {
+                        if (j == 0) {
+                            if (tableau[j + 1][i] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
+                        } else {
+                            if (tableau[j - 1][i] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
+                        }
+
+                    }
+
+                    if (i > 0 && i < 5) {
+                        if (tableau[j][i - 1] !== this.enumPion.VIDE) {
+                            nbVoisin += 1;
+                        }
+                        if (tableau[j][i + 1] !== this.enumPion.VIDE) {
+                            nbVoisin += 1;
+                        }
+                    } else {
+                        if (i == 0) {
+                            if (tableau[j][i + 1] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
+                        } else {
+                            if (tableau[j][i - 1] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
+                        }
+
+                    }
+
+                    if (nbVoisin <= 2) {
+                        piecesDispo.push(this.getPlacement(j,i));
+                    }
+                }
+            }
+        }
+        return piecesDispo;
+    }
+
 
     this.testWinner = function (joueur) {
         var nbBleu = 0, nbBlanc = 0, nbNoir = 0, nbVert = 0, nbRouge = 0, nbJaune = 0;

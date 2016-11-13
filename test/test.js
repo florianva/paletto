@@ -32,6 +32,28 @@ PalettoTestCase.prototype.testStory3 = function () {
 
 };
 
+PalettoTestCase.prototype.testStory4 = function () {
+    var erreur = 0;
+    var piece_dispo = e.getPiecesPrenables();
+    for(var i=0; i<piece_dispo.length; i++){
+        if (e.getColor(piece_dispo[i]) !==  e.enumPion.NOIR && e.getColor(piece_dispo[i]) !==  e.enumPion.BLANC && e.getColor(piece_dispo[i]) !==  e.enumPion.BLEU){
+            erreur = 1;
+        }
+    }
+
+    assertTrue(erreur == 0);
+
+    for(var i=0; i<piece_dispo.length; i++){
+        if (e.getColor(piece_dispo[i]) ===  e.enumPion.NOIR){
+            e.choose(2,piece_dispo[i]);
+            e.retirePiece(piece_dispo[i]);
+        }
+    }
+    assertTrue(e.getJoueur2()[0] === e.enumPion.NOIR);
+    assertTrue(e.getJoueur2()[1] === e.enumPion.NOIR);
+    assertTrue(e.getNbPieces() === 33);
+};
+
 PalettoTestCase.prototype.testStory6 = function () {
     e.choose(1,"A1");
     e.choose(1,"F6");
