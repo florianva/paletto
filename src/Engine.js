@@ -150,16 +150,6 @@ var Engine = function () {
                     if (j > 0 && j < 5) {
                         if (tableau[j - 1][i] !== this.enumPion.VIDE) {
                             nbVoisin += 1;
-    this.getWinner = function () {
-        if(this.testWinner(this.getJoueur1()) === true){
-            return "joueur1";
-        }else if(this.testWinner(this.getJoueur2()) === true){
-            return "joueur2";
-        }else {
-            return "nobody";
-        }
-    };
-
                         }
                         if (tableau[j + 1][i] !== this.enumPion.VIDE) {
                             nbVoisin += 1;
@@ -204,8 +194,19 @@ var Engine = function () {
             }
         }
         return piecesDispo;
-    }
+    };
 
+
+
+    this.getWinner = function () {
+        if(this.testWinner(this.getJoueur1()) === true){
+            return "joueur1";
+        }else if(this.testWinner(this.getJoueur2()) === true){
+            return "joueur2";
+        }else {
+            return "nobody";
+        }
+    };
 
     this.testWinner = function (joueur) {
         var nbBleu = 0, nbBlanc = 0, nbNoir = 0, nbVert = 0, nbRouge = 0, nbJaune = 0;
