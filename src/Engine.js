@@ -100,9 +100,13 @@ var Engine = function () {
 
         this.retirePiece(position);
     };
-    
+
     this.getJoueur1 = function () {
         return joueur1;
+    };
+
+    this.getJoueur2 = function () {
+        return joueur2;
     };
 
     this.getColor = function (position) {
@@ -127,5 +131,49 @@ var Engine = function () {
         tableau[this.getPosition(position).ligne][this.getPosition(position).colonne] = this.enumPion.VIDE;
     };
 
+    this.getWinner = function () {
+        if(this.testWinner(this.getJoueur1()) === true){
+            return "joueur1";
+        }else if(this.testWinner(this.getJoueur2()) === true){
+            return "joueur2";
+        }else {
+            return "nobody";
+        }
+    };
+
+    this.testWinner = function (joueur) {
+        var nbBleu = 0, nbBlanc = 0, nbNoir = 0, nbVert = 0, nbRouge = 0, nbJaune = 0;
+
+        for (var i = 0; i < joueur.length; i++) {
+            switch(joueur[i]) {
+                case this.enumPion.BLANC:
+                    nbBlanc++;
+                    break;
+                case this.enumPion.BLEU:
+                    nbBleu++;
+                    break;
+                case this.enumPion.NOIR:
+                    nbNoir++;
+                    break;
+                case this.enumPion.VERT:
+                    nbVert++;
+                    break;
+                case this.enumPion.ROUGE:
+                    nbRouge++;
+                    break;
+                case this.enumPion.JAUNE:
+                    nbJaune++;
+                    break;
+                default:
+                    console.error(joueur[i]);
+                    break;
+            }
+        }
+
+        if(nbBlanc === 6 || nbBleu === 6 ||nbNoir === 6 || nbVert === 6 || nbRouge === 6 || nbJaune === 6)
+            return true;
+        else
+            return false;
+    }
 
 };
