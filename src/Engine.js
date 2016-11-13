@@ -94,9 +94,9 @@ var Engine = function () {
 
     this.choose = function (joueur, position) {
         if(joueur === 1)
-            joueur1.push(position);
+            joueur1.push(tableau[this.getPosition(position).ligne][this.getPosition(position).colonne]);
         else
-            joueur2.push(position);
+            joueur2.push(tableau[this.getPosition(position).ligne][this.getPosition(position).colonne]);
 
         this.retirePiece(position);
     };
