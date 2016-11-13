@@ -35,14 +35,21 @@ PalettoTestCase.prototype.testStory3 = function () {
 PalettoTestCase.prototype.testStory4 = function () {
     var erreur = 0;
     var piece_dispo = e.getPiecesPrenables();
-    for(var i=0; i<piece_dispo.size; i++){
-        if (piece_dispo[i] !==  e.enumPion.NOIR || piece_dispo[i] !==  e.enumPion.BLANC || piece_dispo[i] !==  e.enumPion.BLEU){
+    for(var i=0; i<piece_dispo.length; i++){
+        if (e.getColor(piece_dispo[i]) !==  e.enumPion.NOIR && e.getColor(piece_dispo[i]) !==  e.enumPion.BLANC && e.getColor(piece_dispo[i]) !==  e.enumPion.BLEU){
             erreur = 1;
         }
     }
 
-    assertTrue(erreur === 0);
+    assertTrue(erreur == 0);
 
-    assertTrue(e.getJoueur2()[0].getColor() === e.enumPion.NOIR);
-    assertTrue(e.getJoueur2()[1].getColor() === e.enumPion.NOIR);
+    for(var i=0; i<piece_dispo.length; i++){
+        if (e.getColor(piece_dispo[i]) ===  e.enumPion.NOIR){
+            e.choose(2,piece_dispo[i]);
+            e.retirePiece(piece_dispo[i]);
+        }
+    }
+    assertTrue(e.getJoueur2()[0] === e.enumPion.NOIR);
+    assertTrue(e.getJoueur2()[1] === e.enumPion.NOIR);
+    assertTrue(e.getNbPieces() === 33);
 };

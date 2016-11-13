@@ -92,6 +92,16 @@ var Engine = function () {
         return {ligne : ligne, colonne : colonne};
     };
 
+    this.getPlacement = function(i, j) {
+
+        var lettre = String.fromCharCode(j+65);
+        var num = i+1;
+        var number = num.toString();
+        var placement = lettre.concat(number);
+
+        return placement;
+    };
+
 
     this.choose = function (joueur, position) {
         if(joueur === 1)
@@ -104,6 +114,10 @@ var Engine = function () {
     
     this.getJoueur1 = function () {
         return joueur1;
+    };
+
+    this.getJoueur2 = function () {
+        return joueur2;
     };
 
     this.getColor = function (position) {
@@ -132,50 +146,52 @@ var Engine = function () {
         for (var i = 0; i < 6; i++) {
             for (var j = 0; j < 6; j++) {
                var nbVoisin = 0;
-                if (i > 0 && i < 5) {
-                   if (tableau[i-1][j].getColor() !== this.enumPion.VIDE){
-                       nbVoisin += 1;
-                   }
-                   if (tableau[i+1][j].getColor() !== this.enumPion.VIDE){
-                        nbVoisin += 1;
-                   }
-               }else{
-                   if(i == 0){
-                       if (tableau[i+1][j].getColor() !== this.enumPion.VIDE){
-                           nbVoisin += 1;
-                       }
-                   }else{
-                       if (tableau[i-1][j].getColor() !== this.enumPion.VIDE){
-                           nbVoisin += 1;
-                       }
-                   }
+                if(tableau[j][i] !== this.enumPion.VIDE) {
+                    if (j > 0 && j < 5) {
+                        if (tableau[j - 1][i] !== this.enumPion.VIDE) {
+                            nbVoisin += 1;
 
-               }
-
-                if (j > 0 && j < 5) {
-                    if (tableau[1][j-1].getColor() !== this.enumPion.VIDE){
-                        nbVoisin += 1;
-                    }
-                    if (tableau[i][j+1].getColor() !== this.enumPion.VIDE){
-                        nbVoisin += 1;
-                    }
-                }else{
-                    if(j == 0){
-                        if (tableau[i][j+1].getColor() !== this.enumPion.VIDE){
+                        }
+                        if (tableau[j + 1][i] !== this.enumPion.VIDE) {
                             nbVoisin += 1;
                         }
-                    }else{
-                        if (tableau[i][j-1].getColor() !== this.enumPion.VIDE){
-                            nbVoisin += 1;
+                    } else {
+                        if (j == 0) {
+                            if (tableau[j + 1][i] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
+                        } else {
+                            if (tableau[j - 1][i] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
                         }
+
                     }
 
-                }
+                    if (i > 0 && i < 5) {
+                        if (tableau[j][i - 1] !== this.enumPion.VIDE) {
+                            nbVoisin += 1;
+                        }
+                        if (tableau[j][i + 1] !== this.enumPion.VIDE) {
+                            nbVoisin += 1;
+                        }
+                    } else {
+                        if (i == 0) {
+                            if (tableau[j][i + 1] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
+                        } else {
+                            if (tableau[j][i - 1] !== this.enumPion.VIDE) {
+                                nbVoisin += 1;
+                            }
+                        }
 
-                if (nbVoisin <= 2){
-                    piecesDispo.push(tableau[i][j].getColor());
-                }
+                    }
 
+                    if (nbVoisin <= 2) {
+                        piecesDispo.push(this.getPlacement(j,i));
+                    }
+                }
             }
         }
         return piecesDispo;
