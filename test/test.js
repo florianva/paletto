@@ -63,3 +63,48 @@ PalettoTestCase.prototype.testStory6 = function () {
     assertTrue(e.getWinner()=="joueur1");
 
 };
+
+PalettoTestCase.prototype.testStory7 = function () {
+
+    var ee = new Engine();
+    ee.initPlateau();
+    ee.choose(1, "A1");
+    ee.choose(1, "F6");
+    ee.choose(2, "A2");
+    ee.choose(2, "A6");
+    ee.choose(1, "A5");
+    ee.choose(1, "F6");
+    ee.choose(2, "E6");
+    ee.choose(2, "B1");
+    ee.choose(2, "F5");
+    ee.choose(1, "A3");
+    ee.choose(1, "F2");
+    ee.choose(2, "C1");
+    ee.choose(2, "F4");
+    ee.choose(1, "E1");
+    ee.choose(1, "D6");
+    ee.choose(1, "A4");
+    ee.choose(1, "F3");
+    ee.choose(2, "D1");
+    ee.choose(2, "B6");
+    ee.choose(1, "E2");
+    ee.choose(1, "E5");
+    ee.choose(2, "C6");
+    ee.choose(2, "D5");
+    ee.choose(2, "E3");
+    ee.choose(1, "B5");
+    ee.choose(2, "D2");
+    ee.choose(1, "B2");
+    ee.choose(1, "D3");
+    ee.choose(2, "E4");
+    ee.choose(1, "C5");
+    ee.choose(1, "B3");
+    ee.choose(2, "D4");
+    ee.choose(2, "C2");
+    ee.choose(1, "C3");
+    ee.choose(2, "B4");
+    ee.choose(1, "C4");
+
+    assertTrue(ee.getWinner() == "joueur1");
+
+};
