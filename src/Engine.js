@@ -6,6 +6,7 @@ var Engine = function () {
     var tableau = [];
     var joueur1 = [];
     var joueur2 = [];
+    var piecesDispo = [];
 
 // public attributes
     this.enumPion = {NOIR: "noir", VERT: "vert", BLEU: "bleu", BLANC: "blanc", JAUNE: "jaune", ROUGE: "rouge", VIDE: "vide"};
@@ -126,6 +127,59 @@ var Engine = function () {
     this.retirePiece = function(position){
         tableau[this.getPosition(position).ligne][this.getPosition(position).colonne] = this.enumPion.VIDE;
     };
+
+    this.getPiecesPrenables = function(){
+        for (var i = 0; i < 6; i++) {
+            for (var j = 0; j < 6; j++) {
+               var nbVoisin = 0;
+                if (i > 0 && i < 5) {
+                   if (tableau[i-1][j].getColor() !== this.enumPion.VIDE){
+                       nbVoisin += 1;
+                   }
+                   if (tableau[i+1][j].getColor() !== this.enumPion.VIDE){
+                        nbVoisin += 1;
+                   }
+               }else{
+                   if(i == 0){
+                       if (tableau[i+1][j].getColor() !== this.enumPion.VIDE){
+                           nbVoisin += 1;
+                       }
+                   }else{
+                       if (tableau[i-1][j].getColor() !== this.enumPion.VIDE){
+                           nbVoisin += 1;
+                       }
+                   }
+
+               }
+
+                if (j > 0 && j < 5) {
+                    if (tableau[1][j-1].getColor() !== this.enumPion.VIDE){
+                        nbVoisin += 1;
+                    }
+                    if (tableau[i][j+1].getColor() !== this.enumPion.VIDE){
+                        nbVoisin += 1;
+                    }
+                }else{
+                    if(j == 0){
+                        if (tableau[i][j+1].getColor() !== this.enumPion.VIDE){
+                            nbVoisin += 1;
+                        }
+                    }else{
+                        if (tableau[i][j-1].getColor() !== this.enumPion.VIDE){
+                            nbVoisin += 1;
+                        }
+                    }
+
+                }
+
+                if (nbVoisin <= 2){
+                    piecesDispo.push(tableau[i][j].getColor());
+                }
+
+            }
+        }
+        return piecesDispo;
+    }
 
 
 };
