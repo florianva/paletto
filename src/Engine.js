@@ -97,6 +97,8 @@ var Engine = function () {
             joueur1.push(position);
         else
             joueur2.push(position);
+
+        this.retirePiece(position);
     };
     
     this.getJoueur1 = function () {
