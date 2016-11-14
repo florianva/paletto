@@ -56,11 +56,11 @@ PalettoTestCase.prototype.testStory4 = function () {
 
 PalettoTestCase.prototype.testStory5 = function () {
     var e2 = new Engine();
-    e2.initPlateau(intermediaire);
+    e2.initPlateau("intermediaire");
     var erreur = 0;
-    var piece_dispo = e.getPiecesPrenables();
+    var piece_dispo = e2.getPiecesPrenables();
     for(var i=0; i<piece_dispo.length; i++){
-        if (piece_dispo[i] !== "D1" || piece_dispo[i] !== "F1" || piece_dispo[i] !== "E3" || piece_dispo[i] !== "A4" || piece_dispo[i] !== "B5" || piece_dispo[i] !== "C6"){
+        if (piece_dispo[i] !== "A4" && piece_dispo[i] !== "B5" && piece_dispo[i] !== "C6" && piece_dispo[i] !== "D1" && piece_dispo[i] !== "E3" && piece_dispo[i] !== "F1"){
             erreur = 1;
         }
     }
