@@ -237,7 +237,7 @@ var Engine = function () {
             }
         }
 
-        if(nbBlanc === 6 || nbBleu === 6 ||nbNoir === 6 || nbVert === 6 || nbRouge === 6 || nbJaune === 6)
+        if(nbBlanc === 6 || nbBleu === 6 ||nbNoir === 6 || nbVert === 6 || nbRouge === 6 || nbJaune === 6 || this.getNbPieces() === 0)
             return true;
         else
             return false;
