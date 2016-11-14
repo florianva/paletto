@@ -35,24 +35,24 @@ var Engine = function () {
     }
 
     var testCote = function (direction, i, j) {
-        var pion = tableau[i][j];
+        var pion = tableau[j][i];
         if (direction == "d") {
-            if (pion != tableau[i + 1][j])
+            if (pion != tableau[j][i + 1])
                 return true;
             else
                 return false;
         } else if (direction == "g") {
-            if (pion != tableau[i - 1][j])
+            if (pion != tableau[j][i - 1])
                 return true;
             else
                 return false;
         } else if (direction == "h") {
-            if (pion != tableau[i][j - 1])
+            if (pion != tableau[j - 1][i])
                 return true;
             else
                 return false;
         } else if (direction == "b") {
-            if (pion != tableau[i][j + 1])
+            if (pion != tableau[j + 1][i])
                 return true;
             else
                 return false;
