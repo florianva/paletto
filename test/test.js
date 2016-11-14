@@ -54,37 +54,50 @@ PalettoTestCase.prototype.testStory4 = function () {
     assertTrue(e.getNbPieces() === 33);
 };
 
-PalettoTestCase.prototype.testStory6 = function () {
+PalettoTestCase.prototype.testStory5 = function () {
     var e2 = new Engine();
-    e2.initPlateau();
-    e2.choose(1,"A1");
-    e2.choose(1,"F6");
-    e2.choose(2,"B1");
-    e2.choose(2,"E6");
-    e2.choose(2,"F5");
-    e2.choose(1,"A2");
-    e2.choose(1,"A6");
-    e2.choose(2,"A3");
-    e2.choose(1,"A5");
-    e2.choose(1,"F4");
-    e2.choose(1,"F1");
-    e2.choose(1,"C1");
-    e2.choose(2,"E1");
-    e2.choose(2,"F3");
-    e2.choose(2,"D6");
-    e2.choose(2,"A4");
-    e2.choose(1,"D3");
-    e2.choose(1,"F2");
-    e2.choose(1,"B6");
-    e2.choose(2,"B3");
-    e2.choose(2,"E2");
-    e2.choose(2,"E5");
-    e2.choose(1,"B4");
-    e2.choose(1,"C6");
-    e2.choose(1,"D5");
-    e2.choose(1,"E3");
+    e2.initPlateau("intermediaire");
+    var erreur = 0;
+    var piece_dispo = e2.getPiecesPrenables();
+    for(var i=0; i<piece_dispo.length; i++){
+        if (piece_dispo[i] !== "A4" && piece_dispo[i] !== "B5" && piece_dispo[i] !== "C6" && piece_dispo[i] !== "D1" && piece_dispo[i] !== "E3" && piece_dispo[i] !== "F1"){
+            erreur = 1;
+        }
+    }
+    assertTrue(erreur == 0);
+};
 
-    assertTrue(e2.getWinner()=="joueur1");
+PalettoTestCase.prototype.testStory6 = function () {
+    var e3 = new Engine();
+    e3.initPlateau();
+    e3.choose(1,"A1");
+    e3.choose(1,"F6");
+    e3.choose(2,"B1");
+    e3.choose(2,"E6");
+    e3.choose(2,"F5");
+    e3.choose(1,"A2");
+    e3.choose(1,"A6");
+    e3.choose(2,"A3");
+    e3.choose(1,"A5");
+    e3.choose(1,"F4");
+    e3.choose(1,"F1");
+    e3.choose(1,"C1");
+    e3.choose(2,"E1");
+    e3.choose(2,"F3");
+    e3.choose(2,"D6");
+    e3.choose(2,"A4");
+    e3.choose(1,"D3");
+    e3.choose(1,"F2");
+    e3.choose(1,"B6");
+    e3.choose(2,"B3");
+    e3.choose(2,"E2");
+    e3.choose(2,"E5");
+    e3.choose(1,"B4");
+    e3.choose(1,"C6");
+    e3.choose(1,"D5");
+    e3.choose(1,"E3");
+
+    assertTrue(e3.getWinner()=="joueur1");
 
 };
 

@@ -12,13 +12,22 @@ var Engine = function () {
     this.enumPion = {NOIR: "noir", VERT: "vert", BLEU: "bleu", BLANC: "blanc", JAUNE: "jaune", ROUGE: "rouge", VIDE: "vide"};
 
 // public methods
-    this.initPlateau = function () {
-        var tab = [this.enumPion.NOIR, this.enumPion.VERT, this.enumPion.BLANC, this.enumPion.BLEU, this.enumPion.ROUGE, this.enumPion.BLANC,
-            this.enumPion.JAUNE, this.enumPion.BLANC, this.enumPion.VERT, this.enumPion.ROUGE, this.enumPion.JAUNE, this.enumPion.BLEU,
-            this.enumPion.BLEU, this.enumPion.JAUNE, this.enumPion.BLEU, this.enumPion.BLANC, this.enumPion.NOIR, this.enumPion.ROUGE,
-            this.enumPion.ROUGE, this.enumPion.NOIR, this.enumPion.ROUGE, this.enumPion.VERT, this.enumPion.BLEU, this.enumPion.BLANC,
-            this.enumPion.BLANC, this.enumPion.VERT, this.enumPion.JAUNE, this.enumPion.NOIR, this.enumPion.JAUNE, this.enumPion.VERT,
-            this.enumPion.JAUNE, this.enumPion.BLEU, this.enumPion.NOIR, this.enumPion.ROUGE, this.enumPion.VERT, this.enumPion.NOIR];
+    this.initPlateau = function (parameter) {
+        if (parameter == undefined) {
+            var tab = [this.enumPion.NOIR, this.enumPion.VERT, this.enumPion.BLANC, this.enumPion.BLEU, this.enumPion.ROUGE, this.enumPion.BLANC,
+                this.enumPion.JAUNE, this.enumPion.BLANC, this.enumPion.VERT, this.enumPion.ROUGE, this.enumPion.JAUNE, this.enumPion.BLEU,
+                this.enumPion.BLEU, this.enumPion.JAUNE, this.enumPion.BLEU, this.enumPion.BLANC, this.enumPion.NOIR, this.enumPion.ROUGE,
+                this.enumPion.ROUGE, this.enumPion.NOIR, this.enumPion.ROUGE, this.enumPion.VERT, this.enumPion.BLEU, this.enumPion.BLANC,
+                this.enumPion.BLANC, this.enumPion.VERT, this.enumPion.JAUNE, this.enumPion.NOIR, this.enumPion.JAUNE, this.enumPion.VERT,
+                this.enumPion.JAUNE, this.enumPion.BLEU, this.enumPion.NOIR, this.enumPion.ROUGE, this.enumPion.VERT, this.enumPion.NOIR];
+        }else{
+            var tab = [this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.BLEU, this.enumPion.ROUGE, this.enumPion.BLANC,
+                this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.ROUGE, this.enumPion.JAUNE, this.enumPion.VIDE,
+                this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.BLEU, this.enumPion.BLANC, this.enumPion.NOIR, this.enumPion.VIDE,
+                this.enumPion.ROUGE, this.enumPion.NOIR, this.enumPion.ROUGE, this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.VIDE,
+                this.enumPion.VIDE, this.enumPion.VERT, this.enumPion.JAUNE, this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.VIDE,
+                this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.NOIR, this.enumPion.VIDE, this.enumPion.VIDE, this.enumPion.VIDE];
+        }
 
         var parcourTab = 0;
         for (var i = 0; i < 6; i++) {
@@ -188,7 +197,9 @@ var Engine = function () {
                     }
 
                     if (nbVoisin <= 2) {
-                        piecesDispo.push(this.getPlacement(j,i));
+                        if(this.verificationDiagonales(j, i) == true) {
+                            piecesDispo.push(this.getPlacement(j, i));
+                        }
                     }
                 }
             }
@@ -196,7 +207,29 @@ var Engine = function () {
         return piecesDispo;
     };
 
-
+    this.verificationDiagonales = function(j, i){
+        if (j > 0 && j < 5 && i > 0 && i < 5) {
+            if (tableau[j - 1][i - 1] == this.enumPion.VIDE && tableau[j + 1][i + 1] == this.enumPion.VIDE) {
+                if (tableau[j + 1][i - 1] !== this.enumPion.VIDE && tableau[j - 1][i + 1] !== this.enumPion.VIDE) {
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                if (tableau[j + 1][i - 1] == this.enumPion.VIDE && tableau[j - 1][i + 1] == this.enumPion.VIDE) {
+                    if (tableau[j - 1][i - 1] !== this.enumPion.VIDE && tableau[j + 1][i + 1] !== this.enumPion.VIDE) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }else{
+                    return true;
+                }
+            }
+        }else{
+            return true;
+        }
+    };
 
     this.getWinner = function () {
         if(this.testWinner(this.getJoueur1()) === true){
